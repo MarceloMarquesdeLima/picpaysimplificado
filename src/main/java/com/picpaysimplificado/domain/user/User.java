@@ -1,5 +1,6 @@
 package com.picpaysimplificado.domain.user;
 
+import com.picpaysimplificado.dtos.UserDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,4 +29,14 @@ public class User {
     private BigDecimal balance;
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    public User(UserDTO date) {
+        this.firstName = date.fisrtName();
+        this.lastName = date.lastName();
+        this.document = date.document();
+        this.balance = date.balance();
+        this.userType = date.UserType();
+        this.password = date.password();
+        this.email = date.email();
+    }
 }

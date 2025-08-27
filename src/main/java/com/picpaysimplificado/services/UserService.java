@@ -2,11 +2,13 @@ package com.picpaysimplificado.services;
 
 import com.picpaysimplificado.domain.user.User;
 import com.picpaysimplificado.domain.user.UserType;
+import com.picpaysimplificado.dtos.UserDTO;
 import com.picpaysimplificado.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -24,11 +26,23 @@ public class UserService {
             throw new Exception("Usuário não tem saldo suficinete!");
         }
     }
+
     public User findUserById(long id) throws Exception {
         return this.repository.findUserById(id).orElseThrow(()-> new Exception("Usuário não encontrado!"));
     }
 
     public void userSave(User user){
         this.repository.save(user);
+    }
+
+    public User createrUser(UserDTO date){
+        User newUser = new User(date);
+        this.userSave(newUser);
+
+        return newUser;
+    }
+
+    public List<User> getAllUsers (){
+        return this.repository.findAll();
     }
 }
