@@ -2,19 +2,17 @@ package com.picpaysimplificado.domain.user;
 
 import com.picpaysimplificado.dtos.UserDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity(name="users")
-@Table(name = "users")
+@Table(name="users")
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@NoArgsConstructor
+@EqualsAndHashCode(of="id")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +29,11 @@ public class User {
     private UserType userType;
 
     public User(UserDTO date) {
-        this.firstName = date.fisrtName();
+        this.firstName = date.firstName();
         this.lastName = date.lastName();
         this.document = date.document();
         this.balance = date.balance();
-        this.userType = date.UserType();
+        this.userType = date.userType();
         this.password = date.password();
         this.email = date.email();
     }
